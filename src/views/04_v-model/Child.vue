@@ -1,18 +1,16 @@
 <template>
   <div class="child">
-    <h3>钱数:{{ modelValue }}</h3>
+    <h3>子组件钱数:{{ modelValue }}</h3>
     <button @click="handler">父子组件数据同步</button>
   </div>
 </template>
 
 <script setup lang="ts">
-//接受props
-let props = defineProps(["modelValue"]);
-let $emit = defineEmits(['update:modelValue']);
-//子组件内部按钮的点击回调
-const handler = ()=>{
-   //触发自定义事件
-   $emit('update:modelValue',props.modelValue+1000);
+// 自定义事件
+let props = defineProps(['modelValue'])
+let $emit = defineEmits(['onUpdate:modelValue'])
+const handler = () => {
+  $emit('onUpdate:modelValue', props.modelValue + 100)
 }
 </script>
 

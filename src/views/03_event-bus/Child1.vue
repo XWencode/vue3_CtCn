@@ -5,16 +5,20 @@
 </template>
 
 <script setup lang="ts">
-import $bus from "../../bus";
+import $bus from '@/bus';
 //组合式API函数
-import { onMounted } from "vue";
+import { onMounted, onBeforeUnmount } from 'vue';
 //组件挂载完毕的时候,当前组件绑定一个事件,接受将来兄弟组件传递的数据
-onMounted(() => {
-  //第一个参数:即为事件类型  第二个参数:即为事件回调
-  $bus.on("car", (car) => {
-    console.log(car);
-  });
-});
+onMounted(()=>{
+  $bus.on('getCar',(car)=>{
+    console.log("感谢兄弟送来的"+car);
+  })
+})
+onBeforeUnmount(()=>{
+  $bus.off('getCar')
+  console.log("卸载了getCar事件");
+  
+})
 </script>
 
 <style scoped>
